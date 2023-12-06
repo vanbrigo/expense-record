@@ -16,6 +16,7 @@ return new class extends Migration
             $table->decimal('expenses',10,2)->default(0);
             $table->decimal('balance',10,2)->default(0);
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
