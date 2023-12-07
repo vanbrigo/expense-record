@@ -10,6 +10,10 @@ class Pay_Method extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name'
+    ];
+
     public function expenses(): HasMany
     {
         return $this->hasMany(Expense::class);

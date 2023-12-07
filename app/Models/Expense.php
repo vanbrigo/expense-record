@@ -10,6 +10,16 @@ class Expense extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'category_id',
+        'pay_method_id',
+        'description',
+        'amount',
+        'date',
+        
+    ];
+
     public function PayMethod(): BelongsTo
     {
         return $this->belongsTo(Pay_Method::class);

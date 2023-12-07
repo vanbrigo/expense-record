@@ -10,6 +10,11 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'type'
+    ];
+
     public function incomes(): HasMany
     {
         return $this->hasMany(Income::class);
