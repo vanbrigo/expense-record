@@ -14,4 +14,9 @@ class Expense extends Model
     {
         return $this->belongsTo(Pay_Method::class);
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
