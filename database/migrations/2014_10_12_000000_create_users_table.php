@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('nickname',100);
             $table->string('email',255)->unique();
             $table->string('password',255);
-            $table->text('avatar_url',500);
+            $table->text('avatar_url',500)->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });                                                                                                                                                                                                                                                                                 
