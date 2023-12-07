@@ -10,9 +10,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nickname');
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('nickname',100);
+            $table->string('email',255)->unique();
+            $table->string('password',255);
+            $table->text('avatar_url',500);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });                                                                                                                                                                                                                                                                                 

@@ -14,7 +14,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->decimal('amount', 10, 2);
             $table->unsignedBigInteger('category_id');
-            $table->string('description');
+            $table->string('description',255);
             $table->date('date');
             $table->unsignedBigInteger('pay_method_id');
             $table->timestamps();
