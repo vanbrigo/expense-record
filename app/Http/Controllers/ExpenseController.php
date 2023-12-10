@@ -82,8 +82,6 @@ class ExpenseController extends Controller
                                     ->where('id',$id)
                                     ->where('user_id',$userId)
                                     ->firstOrFail();
-            dd($expensetoDelete);
-            
             $deletedExpense = Expense::destroy($id);
             return response()->json(
                 [
@@ -109,6 +107,50 @@ class ExpenseController extends Controller
                 [
                     "success" => false,
                     "message" => "Error deleting expense"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    public function editExpenseDescription(Request $request, $id)
+    {
+        try {
+            $userId = auth()->user()->id;
+
+            $expenseToEdit = Expense::query()
+                ->where("id", $id)
+                ->where('user_id', $userId)
+                ->firstOrFail();
+
+            $newDescription = $request->input('description');
+
+            $expenseToEdit->description = $newDescription;
+            $expenseToEdit->save();
+
+            return response()->json(
+                [
+                    "success" => true,
+                    'message' => 'Expense edited successfully'
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Not Found this user's expense"
+                ],
+                Response::HTTP_NOT_FOUND
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error editing expense"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
