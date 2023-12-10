@@ -27,6 +27,7 @@ Route::group([
         Route::post('/logout',[UserController::class,'logout']);
 
         Route::get('/all-expenses',[ExpenseController::class,'getAllExpensesByUserId']);
+        Route::get('/expense/{id}',[ExpenseController::class,'getOneExpenseById']);
         Route::post('/new-expense',[ExpenseController::class,'createExpense']);
         Route::put('/edit-expense/{id}',[ExpenseController::class,'editExpenseDescription']);
         Route::delete('/delete-expense/{id}',[ExpenseController::class,'deleteExpenseById']);

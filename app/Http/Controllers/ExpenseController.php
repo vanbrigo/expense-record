@@ -74,6 +74,44 @@ class ExpenseController extends Controller
         }
     }
 
+    public function getOneExpenseById(Request $request, $id)
+    {
+        try {
+            $userId = auth()->user()->id;
+            $expense=Expense::query()
+                                    ->where('id',$id)
+                                    ->where('user_id',$userId)
+                                    ->firstOrFail();
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Expense gotted successfully",
+                    "data" => $expense
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Expense not found for this user"
+                ],
+                Response::HTTP_NOT_FOUND
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting expense"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
     public function deleteExpenseById(Request $request, $id)
     {
         try {
