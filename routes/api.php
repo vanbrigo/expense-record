@@ -28,5 +28,6 @@ Route::group([
 
         Route::get('/all-expenses',[ExpenseController::class,'getAllExpensesByUserId']);
         Route::post('/new-expense',[ExpenseController::class,'createExpense']);
+        Route::delete('/delete-expense/{id}',[ExpenseController::class,'deleteExpenseById']);
     }
 );
