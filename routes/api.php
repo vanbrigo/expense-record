@@ -35,5 +35,6 @@ Route::group([
 
         Route::post('/new-income',[IncomeController::class,'createIncome']);
         Route::delete('/delete-income/{id}',[IncomeController::class,'deleteIncomeById']);
+        Route::put('/edit-income/{id}',[IncomeController::class,'editIncomeDescription']);
     }
 );
