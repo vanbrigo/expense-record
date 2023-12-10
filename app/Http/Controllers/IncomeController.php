@@ -58,4 +58,41 @@ class IncomeController extends Controller
             );
         }
     }
+
+    public function deleteIncomeById(Request $request, $id)
+    {
+        try {
+            $userId = auth()->user()->id;
+            Income::query()
+                ->where('user_id', $userId)
+                ->findOrFail($id);
+            Income::destroy($id);
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Income deleted successfully"
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Income not found for this user"
+                ],
+                Response::HTTP_NOT_FOUND
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error deleting income"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
