@@ -78,10 +78,9 @@ class ExpenseController extends Controller
     {
         try {
             $userId = auth()->user()->id;
-            $expense=Expense::query()
-                                    ->where('id',$id)
-                                    ->where('user_id',$userId)
-                                    ->firstOrFail();
+            $expense = Expense::query()
+                ->where('user_id', $userId)
+                ->findOrFail($id);
             return response()->json(
                 [
                     "success" => true,
@@ -116,10 +115,9 @@ class ExpenseController extends Controller
     {
         try {
             $userId = auth()->user()->id;
-            $expensetoDelete=Expense::query()
-                                    ->where('id',$id)
-                                    ->where('user_id',$userId)
-                                    ->firstOrFail();
+            Expense::query()
+                ->where('user_id', $userId)
+                ->findOrFail($id);
             $deletedExpense = Expense::destroy($id);
             return response()->json(
                 [
