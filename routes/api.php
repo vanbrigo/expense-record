@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,5 +25,8 @@ Route::group([
     ], function (){
         Route::get('/profile',[UserController::class,'profile']);
         Route::post('/logout',[UserController::class,'logout']);
+
+        Route::get('/all-expenses',[ExpenseController::class,'getAllExpensesByUserId']);
+        Route::post('/new-expense',[ExpenseController::class,'createExpense']);
     }
 );
