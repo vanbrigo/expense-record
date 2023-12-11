@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\Pay_methodController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,8 @@ Route::group([
     ], function (){
         Route::get('/profile',[UserController::class,'profile']);
         Route::post('/logout',[UserController::class,'logout']);
+
+        Route::get('/pay-methods',[Pay_methodController::class,'getAllPayMethods']);
 
         Route::get('/categories-expenses',[CategoryController::class,'getAllExpensesCategories']);
         Route::get('/categories-incomes',[CategoryController::class,'getAllIncomesCategories']);
