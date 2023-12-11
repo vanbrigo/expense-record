@@ -59,6 +59,64 @@ class IncomeController extends Controller
         }
     }
 
+    public function getAllIncomesByUserId(Request $request)
+    {
+        try {
+            $userId = auth()->user()->id;
+            $incomes = Income::query()->where('user_id',$userId)->get();
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Successfully retrieved all incomes",
+                    "data" => $incomes
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting all incomes"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    public function getAllIncomesByDate(Request $request)
+    {
+        try {
+            $userId = auth()->user()->id;
+            $month=request('month');
+            $year=request('year');
+            $incomes = Income::query()
+                               ->where('user_id',$userId)
+                               ->whereMonth('date',$month)
+                               ->whereYear('date',$year)
+                               ->get();
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Successfully retrieved all incomes for the month of {$month}",
+                    "data" => $incomes
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting all incomes"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
     public function deleteIncomeById(Request $request, $id)
     {
         try {

@@ -33,6 +33,8 @@ Route::group([
         Route::put('/edit-expense/{id}',[ExpenseController::class,'editExpenseDescription']);
         Route::delete('/delete-expense/{id}',[ExpenseController::class,'deleteExpenseById']);
 
+        Route::get('/all-incomes',[IncomeController::class,'getAllIncomeByUserId']);
+        Route::get('/incomes',[IncomeController::class,'getAllIncomesByDate']);
         Route::post('/new-income',[IncomeController::class,'createIncome']);
         Route::delete('/delete-income/{id}',[IncomeController::class,'deleteIncomeById']);
         Route::put('/edit-income/{id}',[IncomeController::class,'editIncomeDescription']);
