@@ -29,6 +29,7 @@ Route::group([
         Route::post('/logout',[UserController::class,'logout']);
 
         Route::get('/categories-expenses',[CategoryController::class,'getAllExpensesCategories']);
+        Route::get('/categories-incomes',[CategoryController::class,'getAllIncomesCategories']);
 
         Route::get('/all-expenses',[ExpenseController::class,'getAllExpensesByUserId']);
         Route::get('/expenses',[ExpenseController::class,'getAllExpensesByDate']);

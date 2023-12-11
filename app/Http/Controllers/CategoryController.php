@@ -33,4 +33,29 @@ class CategoryController extends Controller
             );
         }
     }
+
+    public function getAllIncomesCategories(Request $request)
+    {
+        try {
+            $categories = Category::query()->where('type','income')->get();
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Incomes categories retrieved successfully",
+                    "data" => $categories
+                ],
+                Response::HTTP_OK
+            );  
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting all incomes categories"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
