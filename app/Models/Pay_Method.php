@@ -13,6 +13,7 @@ class Pay_Method extends Model
     protected $fillable = [
         'name'
     ];
+    protected $table = 'pay_method';
 
     public function expenses(): HasMany
     {

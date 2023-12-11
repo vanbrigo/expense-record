@@ -27,6 +27,8 @@ Route::group([
         Route::get('/profile',[UserController::class,'profile']);
         Route::post('/logout',[UserController::class,'logout']);
 
+        Route::get('/expenses-categories',[ExpenseController::class,'getAllExpensesCategories']);
+
         Route::get('/all-expenses',[ExpenseController::class,'getAllExpensesByUserId']);
         Route::get('/expenses',[ExpenseController::class,'getAllExpensesByDate']);
         Route::get('/expense/{id}',[ExpenseController::class,'getOneExpenseById']);
