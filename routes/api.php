@@ -35,6 +35,7 @@ Route::group([
 
         Route::get('/all-incomes',[IncomeController::class,'getAllIncomeByUserId']);
         Route::get('/incomes',[IncomeController::class,'getAllIncomesByDate']);
+        Route::get('/income/{id}',[IncomeController::class,'getOneIncomeById']);
         Route::post('/new-income',[IncomeController::class,'createIncome']);
         Route::delete('/delete-income/{id}',[IncomeController::class,'deleteIncomeById']);
         Route::put('/edit-income/{id}',[IncomeController::class,'editIncomeDescription']);
