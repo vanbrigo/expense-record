@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\UserController;
@@ -27,7 +28,7 @@ Route::group([
         Route::get('/profile',[UserController::class,'profile']);
         Route::post('/logout',[UserController::class,'logout']);
 
-        Route::get('/expenses-categories',[ExpenseController::class,'getAllExpensesCategories']);
+        Route::get('/categories-expenses',[CategoryController::class,'getAllExpensesCategories']);
 
         Route::get('/all-expenses',[ExpenseController::class,'getAllExpensesByUserId']);
         Route::get('/expenses',[ExpenseController::class,'getAllExpensesByDate']);
