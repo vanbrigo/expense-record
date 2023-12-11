@@ -16,97 +16,97 @@ class CategorySeeder extends Seeder
         Category::create([
             'name' => "groceries",
             'type' => "expense",
-            'icon_url'=>"https://iconos8.es/icon/7621/ingredientes"
+            'icon_url'=>"https://img.icons8.com/ios/50/ingredients.png"
         ]);
         Category::create([
             'name' => "housing",
             'type' => "expense",
-            'icon_url'=>"https://iconos8.es/icon/53382/p%C3%A1gina-principal"
+            'icon_url'=>"https://img.icons8.com/ios/50/home-page.png"
         ]);
         Category::create([
             'name' => "transportation",
             'type' => "expense",
-            'icon_url'=>"https://iconos8.es/icon/16556/subterr%C3%A1neo"
+            'icon_url'=>"https://img.icons8.com/ios/50/subway.png"
         ]);
         Category::create([
             'name' => "entertainment",
             'type' => "expense",
-            'icon_url'=>"https://iconos8.es/icon/62370/palomitas"
+            'icon_url'=>"https://img.icons8.com/ios/50/popcorn.png"
         ]);
         Category::create([
             'name' => "gym",
             'type' => "expense",
-            'icon_url'=>"https://iconos8.es/icon/oRBt2rHxvhPg/fortaleza"
+            'icon_url'=>"https://img.icons8.com/ios/50/strength.png"
         ]);
         Category::create([
             'name' => "mobile phone",
             'type' => "expense",
-            'icon_url'=>"https://iconos8.es/icon/79/iphone"
+            'icon_url'=>"https://img.icons8.com/ios/50/iphone.png"
         ]);
         Category::create([
             'name' => "health",
             'type' => "expense",
-            'icon_url'=>"https://iconos8.es/icon/35583/coraz%C3%B3n-con-pulso"
+            'icon_url'=>"https://img.icons8.com/ios/50/heart-with-pulse--v1.png"
         ]);
         Category::create([
             'name' => "education",
             'type' => "expense",
-            'icon_url'=>"https://iconos8.es/icon/37815/pila-de-libros"
+            'icon_url'=>"https://img.icons8.com/ios/50/book-stack.png"
         ]);
         Category::create([
             'name' => "bills",
             'type' => "expense",
-            'icon_url'=>"https://iconos8.es/icon/85646/recibo-y-cambio"
+            'icon_url'=>"https://img.icons8.com/ios/50/receipt-and-change.png"
         ]);
         Category::create([
             'name' => "taxes",
             'type' => "expense",
-            'icon_url'=>"https://iconos8.es/icon/Y694RNOaBIG2/impuesto-sobre-la-renta"
+            'icon_url'=>"https://img.icons8.com/ios/50/income-tax.png"
         ]);
         Category::create([
             'name' => "travel",
             'type' => "expense",
-            'icon_url'=>"https://iconos8.es/icon/2487/despegue"
+            'icon_url'=>"https://img.icons8.com/ios/50/airplane-take-off.png"
         ]);
         Category::create([
             'name' => "personal care",
             'type' => "expense",
-            'icon_url'=>"https://iconos8.es/icon/78801/bienestar"
+            'icon_url'=>"https://img.icons8.com/ios/50/welfare.png"
         ]);
         Category::create([
             'name' => "other",
             'type' => "expense",
-            'icon_url'=>"https://iconos8.es/icon/12091/producto"
+            'icon_url'=>"https://img.icons8.com/ios/50/product--v1.png"
         ]);
         Category::create([
             'name' => "salary",
             'type' => "income",
-            'icon_url'=>"https://iconos8.es/icon/56220/mont%C3%B3n-de-dinero"
+            'icon_url'=>"https://img.icons8.com/ios/50/money-transfer.png"
         ]);
         Category::create([
             'name' => "investment",
             'type' => "income",
-            'icon_url'=>"https://iconos8.es/icon/woBZ9ziilgxi/balance-rendimiento-ventas"
+            'icon_url'=>"https://img.icons8.com/ios/50/sales-performance-balance.png"
         ]);
         Category::create([
-            'name' => "sale",
+            'name' => "sales",
             'type' => "income",
-            'icon_url'=>"https://iconos8.es/icon/xgzck7TcTBcj/recibir-cambio"
+            'icon_url'=>"https://img.icons8.com/ios/50/sell.png"
         ]);
         Category::create([
             'name' => "pension",
             'type' => "income",
-            'icon_url'=>"https://iconos8.es/icon/eNLixBqHsYhd/pension"
+            'icon_url'=>"https://img.icons8.com/external-line512-zulfa-mahendra/50/external-retirement-saving-and-investment-line512-zulfa-mahendra.png"
         ]);
         Category::create([
             'name' => "savings",
             'type' => "income",
-            'icon_url'=>"https://iconos8.es/icon/2975/caja-de-dinero"
+            'icon_url'=>"https://img.icons8.com/ios/50/money-box--v1.png"
         ]);
         Category::create([
             'name' => "other sources",
             'type' => "income",
-            'icon_url'=>"https://iconos8.es/icon/2806/dinero"
+            'icon_url'=>"https://img.icons8.com/ios/50/money--v1.png"
         ]);
     }
 }
