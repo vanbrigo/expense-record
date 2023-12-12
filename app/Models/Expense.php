@@ -19,7 +19,7 @@ class Expense extends Model
         'date',
         
     ];
-
+    
     public function PayMethod(): BelongsTo
     {
         return $this->belongsTo(Pay_Method::class);
