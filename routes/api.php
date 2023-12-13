@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::get('/categories-expenses',[CategoryController::class,'getAllExpensesCategories']);
 Route::post('/register',[AuthController::class, 'register']);
 Route::post('/login',[AuthController::class, 'login']);
 
@@ -29,9 +28,10 @@ Route::group([
     ], function (){
         Route::get('/profile',[UserController::class,'profile']);
         Route::post('/logout',[UserController::class,'logout']);
-
+        
         Route::get('/pay-methods',[Pay_methodController::class,'getAllPayMethods']);
-
+        
+        Route::get('/categories-expenses',[CategoryController::class,'getAllExpensesCategories']);
         Route::get('/categories-incomes',[CategoryController::class,'getAllIncomesCategories']);
 
         Route::get('/all-expenses',[ExpenseController::class,'getAllExpensesByUserId']);

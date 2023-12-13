@@ -118,6 +118,7 @@ class ExpenseController extends Controller
             $month=request('month');
             $year=request('year');
             $expenses = Expense::query()
+                               ->with('category')
                                ->where('user_id',$userId)
                                ->whereMonth('date',$month)
                                ->whereYear('date',$year)
