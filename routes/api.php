@@ -28,6 +28,7 @@ Route::group([
     ], function (){
         Route::get('/profile',[UserController::class,'profile']);
         Route::post('/logout',[UserController::class,'logout']);
+        Route::put('/edit-nickname',[UserController::class,'editUserNickname']);
         
         Route::get('/pay-methods',[Pay_methodController::class,'getAllPayMethods']);
         
