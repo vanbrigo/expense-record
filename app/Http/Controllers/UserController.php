@@ -79,6 +79,49 @@ class UserController extends Controller
         }
     }
 
+    public function editUserAvatar(Request $request)
+    {
+        try {
+            $userId = auth()->user()->id;
+
+            $userToEdit = User::query()
+                ->findOrFail($userId);
+
+            $newAvatar = $request->input('avatar_url');
+
+            $userToEdit->avatar_url = $newAvatar;
+            $userToEdit->save();
+
+            return response()->json(
+                [
+                    "success" => true,
+                    'message' => 'Avatar updated successfully',
+                    'data'=> $userToEdit
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "User not found"
+                ],
+                Response::HTTP_NOT_FOUND
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error updating avatar"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
     public function logout(Request $request)
     {
         $accessToken = $request->bearerToken();
@@ -95,3 +138,5 @@ class UserController extends Controller
         );
     }
 }
+
+
