@@ -53,5 +53,6 @@ Route::group([
 
         Route::get('/all-balances',[BalanceController::class,'getAllBalancesByUserId']);
         Route::get('/balance',[BalanceController::class,'getOneBalanceByDate']);
+        Route::post('/new-balance',[BalanceController::class,'createBalance']);
     }
 );

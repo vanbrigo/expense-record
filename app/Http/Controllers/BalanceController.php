@@ -66,4 +66,42 @@ class BalanceController extends Controller
             );
         }
     }
+
+    public function createBalance(Request $request)
+    {
+        try {
+            $userId = auth()->user()->id;
+            $date= $request->input('date');
+            $income = $request->input('income');
+            $expense = $request->input('expense');
+            $balance = $request->input('balance');
+            
+
+            $newBalance = Balance::create([
+                'user_id' => $userId,
+                'date' => $date,
+                'income' => $income,
+                'expenses'=> $expense,
+                'balance'=> $balance
+            ]);
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Created balance successfully",
+                    "data" => $newBalance
+                ],
+                Response::HTTP_CREATED
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error creating balance"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
