@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\IncomeController;
@@ -49,5 +50,7 @@ Route::group([
         Route::post('/new-income',[IncomeController::class,'createIncome']);
         Route::delete('/delete-income/{id}',[IncomeController::class,'deleteIncomeById']);
         Route::put('/edit-income/{id}',[IncomeController::class,'editIncomeDescription']);
+
+        Route::get('/all-balances',[BalanceController::class,'getAllBalancesByUserId']);
     }
 );
