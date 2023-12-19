@@ -34,4 +34,36 @@ class BalanceController extends Controller
             );
         }
     }
+
+    public function getOneBalanceByDate(Request $request)
+    {
+        try {
+            $userId = auth()->user()->id;
+            $month=request('month');
+            $year=request('year');
+            $balance = Balance::query()
+                               ->where('user_id',$userId)
+                               ->whereMonth('date',$month)
+                               ->whereYear('date',$year)
+                               ->get();
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Successfully retrieved balance for the month of {$month}",
+                    "data" => $balance
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting balance"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }

@@ -52,5 +52,6 @@ Route::group([
         Route::put('/edit-income/{id}',[IncomeController::class,'editIncomeDescription']);
 
         Route::get('/all-balances',[BalanceController::class,'getAllBalancesByUserId']);
+        Route::get('/balance',[BalanceController::class,'getOneBalanceByDate']);
     }
 );
