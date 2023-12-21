@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -103,5 +104,30 @@ class SuperAdminController extends Controller
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
          }
+    }
+
+    public function getAllCategories(Request $request)
+    {
+        try {
+            $categories = Category::query()->get();
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "All categories retrieved successfully",
+                    "data" => $categories
+                ],
+                Response::HTTP_OK
+            );  
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting all categories"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 }
