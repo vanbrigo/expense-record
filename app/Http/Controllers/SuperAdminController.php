@@ -40,7 +40,15 @@ class SuperAdminController extends Controller
     {
         try{
             $user=User::query()->findOrFail($id);
-
+            if($user->is_active===false){
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "User is already inactive"
+                    ],
+                    Response::HTTP_OK
+                );
+            }
             $user->is_active = false;
             $user->save();
 
@@ -76,6 +84,15 @@ class SuperAdminController extends Controller
     {
         try{
             $user=User::query()->findOrFail($id);
+            if($user->is_active===true){
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "User is already active"
+                    ],
+                    Response::HTTP_OK
+                );
+            }
             $user->is_active = true;
             $user->save();
             return response()->json(
