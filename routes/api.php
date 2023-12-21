@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\Pay_methodController;
+use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -60,5 +61,5 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum', 'is_super_admin']
 ], function () {
-    
+    Route::get('/all-users',[SuperAdminController::class,'getAllUsers']);
 });
