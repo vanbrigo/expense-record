@@ -62,4 +62,6 @@ Route::group([
     'middleware' => ['auth:sanctum', 'is_super_admin']
 ], function () {
     Route::get('/all-users',[SuperAdminController::class,'getAllUsers']);
+    Route::put('/user-inactivate/{id}',[SuperAdminController::class,'inactivateUser']);
+    Route::put('/user-activate/{id}',[SuperAdminController::class,'activateUser']);
 });

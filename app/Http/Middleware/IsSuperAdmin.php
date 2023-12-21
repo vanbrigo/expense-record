@@ -15,7 +15,7 @@ class IsSuperAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->role != 'super_admin') {
+        if (auth()->user()->role != "super_admin") {
             return response()->json(
                 [
                     "success" => false,
