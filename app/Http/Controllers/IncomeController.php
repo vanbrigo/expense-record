@@ -129,6 +129,7 @@ class IncomeController extends Controller
             $month=request('month');
             $year=request('year');
             $incomes = Income::query()
+                               ->with('category')
                                ->where('user_id',$userId)
                                ->whereMonth('date',$month)
                                ->whereYear('date',$year)

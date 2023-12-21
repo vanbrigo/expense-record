@@ -46,6 +46,12 @@ class BalanceController extends Controller
                                ->whereMonth('date',$month)
                                ->whereYear('date',$year)
                                ->get();
+
+
+             //recuperar ingresos
+             //recuperar gastos
+             //calcular balance
+             //devolver balance
             return response()->json(
                 [
                     "success" => true,
