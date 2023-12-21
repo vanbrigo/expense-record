@@ -56,3 +56,9 @@ Route::group([
         Route::post('/new-balance',[BalanceController::class,'createBalance']);
     }
 );
+
+Route::group([
+    'middleware' => ['auth:sanctum', 'is_super_admin']
+], function () {
+    
+});
