@@ -172,4 +172,45 @@ class SuperAdminController extends Controller
             );
         }
     }
+
+    public function editUserRole(Request $request, $id)
+    {
+        try {
+            $userToEdit = User::query()
+                ->findOrFail($id);
+
+            $newRole = $request->input('role');
+
+            $userToEdit->role = $newRole;
+            $userToEdit->save();
+
+            return response()->json(
+                [
+                    "success" => true,
+                    'message' => 'Role updated successfully',
+                    'data'=> $userToEdit
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "User not found"
+                ],
+                Response::HTTP_NOT_FOUND
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error updating role"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
