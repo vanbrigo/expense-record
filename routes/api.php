@@ -65,4 +65,5 @@ Route::group([
     Route::get('/all-categories',[SuperAdminController::class,'getAllCategories']);
     Route::put('/user-inactivate/{id}',[SuperAdminController::class,'inactivateUser']);
     Route::put('/user-activate/{id}',[SuperAdminController::class,'activateUser']);
+    Route::delete('/delete-category/{id}',[SuperAdminController::class,'deleteCategoryById']);
 });
