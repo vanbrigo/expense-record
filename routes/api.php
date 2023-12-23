@@ -45,7 +45,7 @@ Route::group([
         Route::put('/edit-expense/{id}',[ExpenseController::class,'editExpenseDescription']);
         Route::delete('/delete-expense/{id}',[ExpenseController::class,'deleteExpenseById']);
 
-        Route::get('/all-incomes',[IncomeController::class,'getAllIncomeByUserId']);
+        Route::get('/all-incomes',[IncomeController::class,'getAllIncomesByUserId']);
         Route::get('/incomes',[IncomeController::class,'getAllIncomesByDate']);
         Route::get('/income/{id}',[IncomeController::class,'getOneIncomeById']);
         Route::post('/new-income',[IncomeController::class,'createIncome']);
@@ -54,6 +54,7 @@ Route::group([
 
         Route::get('/all-balances',[BalanceController::class,'getAllBalancesByUserId']);
         Route::get('/balance',[BalanceController::class,'getOneBalanceByDate']);
+        Route::get('/balance-date',[BalanceController::class,'getBalanceByDate']);
         Route::post('/new-balance',[BalanceController::class,'createBalance']);
     }
 );

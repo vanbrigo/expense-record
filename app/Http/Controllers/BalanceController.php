@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Balance;
+use App\Models\Expense;
+use App\Models\Income;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
@@ -110,4 +112,50 @@ class BalanceController extends Controller
             );
         }
     }
+
+    public function getBalanceByDate(Request $request)
+    {
+        try {
+            $userId = auth()->user()->id;
+            $month=request('month');
+            $year=request('year');
+            $totalExpenses = Expense::query()
+                               ->where('user_id',$userId)
+                               ->whereMonth('date',$month)
+                               ->whereYear('date',$year)
+                               ->sum('amount');
+            
+            $totalIncomes = Income::query()
+                               ->where('user_id',$userId)
+                               ->whereMonth('date',$month)
+                               ->whereYear('date',$year)
+                               ->sum('amount');
+            $totalBalance=$totalIncomes-$totalExpenses;
+            $balance=[
+                "expenses" => $totalExpenses,
+                "incomes" => $totalIncomes,
+                "balance" => $totalBalance
+            ];
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Successfully retrieved balance for the month of {$month}",
+                    "data" => $balance
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting all expenses"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
+
+
