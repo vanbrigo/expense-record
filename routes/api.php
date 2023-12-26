@@ -51,6 +51,8 @@ Route::group([
         Route::post('/new-income',[IncomeController::class,'createIncome']);
         Route::delete('/delete-income/{id}',[IncomeController::class,'deleteIncomeById']);
         Route::put('/edit-income/{id}',[IncomeController::class,'editIncomeDescription']);
+        Route::put('/edit-income-category/{id}',[IncomeController::class,'editCategoryIncome']);
+
 
         Route::get('/all-balances',[BalanceController::class,'getAllBalancesByUserId']);
         Route::get('/balance',[BalanceController::class,'getOneBalanceByDate']);
