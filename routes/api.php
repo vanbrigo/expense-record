@@ -53,6 +53,7 @@ Route::group([
         Route::delete('/delete-income/{id}',[IncomeController::class,'deleteIncomeById']);
         Route::put('/edit-income/{id}',[IncomeController::class,'editIncomeDescription']);
         Route::put('/edit-income-category/{id}',[IncomeController::class,'editCategoryIncome']);
+        Route::put('/edit-income-amount/{id}',[IncomeController::class,'editAmountIncome']);
 
 
         Route::get('/all-balances',[BalanceController::class,'getAllBalancesByUserId']);

@@ -279,4 +279,48 @@ class IncomeController extends Controller
             );
         }
     }
+
+    public function editAmountIncome(Request $request, $id)
+    {
+        try {
+            $userId = auth()->user()->id;
+
+            $incomeToEdit = Income::query()
+                ->where('user_id', $userId)
+                ->findOrFail($id);
+
+            $newAmount = $request->input('amount');
+
+            $incomeToEdit->amount = $newAmount;
+            $incomeToEdit->save();
+
+            return response()->json(
+                [
+                    "success" => true,
+                    'message' => 'Income edited successfully',
+                    'data' => $incomeToEdit
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Not Found this user's income"
+                ],
+                Response::HTTP_NOT_FOUND
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error editing income"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
