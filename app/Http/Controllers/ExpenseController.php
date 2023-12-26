@@ -225,4 +225,48 @@ class ExpenseController extends Controller
             );
         }
     }
+
+    public function editCategoryExpense(Request $request, $id)
+    {
+        try {
+            $userId = auth()->user()->id;
+
+            $expenseToEdit = Expense::query()
+                ->where('user_id', $userId)
+                ->findOrFail($id);
+
+            $newCategory = $request->input('category');
+
+            $expenseToEdit->category_id = $newCategory;
+            $expenseToEdit->save();
+
+            return response()->json(
+                [
+                    "success" => true,
+                    'message' => 'Expense edited successfully',
+                    'data' => $expenseToEdit
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Not Found this user's expense"
+                ],
+                Response::HTTP_NOT_FOUND
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error editing expense"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
