@@ -45,6 +45,7 @@ Route::group([
         Route::put('/edit-expense/{id}',[ExpenseController::class,'editExpenseDescription']);
         Route::delete('/delete-expense/{id}',[ExpenseController::class,'deleteExpenseById']);
         Route::put('/edit-expense-category/{id}',[ExpenseController::class,'editCategoryExpense']);
+        Route::put('/edit-expense-amount/{id}',[ExpenseController::class,'editAmountExpense']);
 
         Route::get('/all-incomes',[IncomeController::class,'getAllIncomesByUserId']);
         Route::get('/incomes',[IncomeController::class,'getAllIncomesByDate']);
