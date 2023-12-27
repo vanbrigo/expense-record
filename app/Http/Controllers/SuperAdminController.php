@@ -194,18 +194,16 @@ class SuperAdminController extends Controller
             );
         } catch (\Throwable $th) {
             $errorCode = $th->errorInfo[1];
-
-        if ($errorCode == 1451) {
-            return response()->json(
-                [
-                    "success" => false,
-                    "message" => "Cannot delete the category. It is referenced in another table."
-                ],
-                Response::HTTP_CONFLICT
-            );
-        }
+            if ($errorCode == 1451) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Cannot delete the category. It is referenced in another table."
+                    ],
+                    Response::HTTP_CONFLICT
+                );
+            }
             Log::error($th->getMessage());
-
             return response()->json(
                 [
                     "success" => false,
