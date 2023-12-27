@@ -259,7 +259,7 @@ class SuperAdminController extends Controller
     {
         try{
             $category=Category::query()->findOrFail($id);
-            if($category->is_active===false){
+            if($category->is_active==false){
                 return response()->json(
                     [
                         "success" => true,
@@ -303,7 +303,7 @@ class SuperAdminController extends Controller
     {
         try{
             $category=Category::query()->findOrFail($id);
-            if($category->is_active===true){
+            if($category->is_active==true){
                 return response()->json(
                     [
                         "success" => true,

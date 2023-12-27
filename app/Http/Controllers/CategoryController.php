@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function getAllExpensesCategories(Request $request)
     {
         try {
-            $categories = Category::query()->where('type','expense')->get();
+            $categories = Category::query()->where('type','expense')->where('is_active',true)->get();
             return response()->json(
                 [
                     "success" => true,
@@ -37,7 +37,7 @@ class CategoryController extends Controller
     public function getAllIncomesCategories(Request $request)
     {
         try {
-            $categories = Category::query()->where('type','income')->get();
+            $categories = Category::query()->where('type','income')->where('is_active',true)->get();
             return response()->json(
                 [
                     "success" => true,
