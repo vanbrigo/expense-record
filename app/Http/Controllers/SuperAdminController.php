@@ -254,4 +254,91 @@ class SuperAdminController extends Controller
             );
         }
     }
+
+    public function inactivateCategory(Request $request,$id)
+    {
+        try{
+            $category=Category::query()->findOrFail($id);
+            if($category->is_active===false){
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "Category is already inactive"
+                    ],
+                    Response::HTTP_OK
+                );
+            }
+            $category->is_active = false;
+            $category->save();
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Inactivated category"
+                ],
+                Response::HTTP_OK
+            );
+        } catch (ModelNotFoundException $e) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Category not found"
+                ]
+                ,
+                Response::HTTP_NOT_FOUND
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error inactivating category"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+         }
+    }
+
+    public function activateCategory(Request $request, $id)
+    {
+        try{
+            $category=Category::query()->findOrFail($id);
+            if($category->is_active===true){
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "Category is already active"
+                    ],
+                    Response::HTTP_OK
+                );
+            }
+            $category->is_active = true;
+            $category->save();
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Category activated successfully"
+                ],
+                Response::HTTP_OK
+            );
+        } catch (ModelNotFoundException $e) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Category not found"
+                ]
+                ,
+                Response::HTTP_NOT_FOUND
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error activated category"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+         }
+    }
 }
