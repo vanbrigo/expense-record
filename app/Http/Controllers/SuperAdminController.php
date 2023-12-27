@@ -11,6 +11,39 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SuperAdminController extends Controller
 {
+    public function createCategory(Request $request)
+    {
+        try {
+            $name = $request->input('name');
+            $type = $request->input('type');
+            $icon_url = $request->input('icon_url');
+            
+            $newCategory = Category::create([
+                'name'=> $name,
+                'type'=>$type,
+                'icon_url'=>$icon_url
+            ]);
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Category created successfully",
+                    "data" => $newCategory
+                ],
+                Response::HTTP_CREATED
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error creating category"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
     public function getAllUsers(Request $request)
     {
         try {
@@ -151,16 +184,26 @@ class SuperAdminController extends Controller
     public function deleteCategoryById(Request $request, $id)
     {
         try {
-            $deletedCategory = Category::destroy($id);
+            Category::destroy($id);
             return response()->json(
                 [
                     "success" => true,
-                    "message" => "Category deleted successfully",
-                    "data" => $deletedCategory
+                    "message" => "Category deleted successfully"
                 ],
                 Response::HTTP_OK
             );
         } catch (\Throwable $th) {
+            $errorCode = $th->errorInfo[1];
+
+        if ($errorCode == 1451) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Cannot delete the category. It is referenced in another table."
+                ],
+                Response::HTTP_CONFLICT
+            );
+        }
             Log::error($th->getMessage());
 
             return response()->json(
