@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\Income;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +19,14 @@ class ExpenseController extends Controller
             $description = $request->input('description');
             $date = $request->input('date');
             $payMethodId = $request->input('pay_method_id');
-
+            $parts= explode('-',$date);
+            $income = Income::query()
+            ->where('user_id', $userId)
+            ->whereMonth('date', $parts[1])
+            ->whereYear('date', $parts[0])
+            ->firstOrFail();
+            
+            // dd($income);
             $newExpense = Expense::create([
                 'user_id' => $userId,
                 'amount' => $amount,
@@ -34,6 +42,15 @@ class ExpenseController extends Controller
                     "data" => $newExpense
                 ],
                 Response::HTTP_CREATED
+            );
+        }catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "You need to insert an income first"
+                ],
+                Response::HTTP_NOT_FOUND
             );
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
